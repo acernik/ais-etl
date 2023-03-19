@@ -1,0 +1,6 @@
+github.com/aisstream/ais-message-models/golang/aisStream v0.0.0-20221228192545-6a6efb6f4595 h1:c5h60IYOGQclYsKPsIurt+ZRBcwnIvUpsWf5y5aduJ8=
+github.com/aisstream/ais-message-models/golang/aisStream v0.0.0-20221228192545-6a6efb6f4595/go.mod h1:xrb7t7b2Het1o1/ompfiTuIqU6iQ/nh+LOiAouJjgi4=
+github.com/gorilla/websocket v1.5.0 h1:PPwGk2jz7EePpoHN/+ClbZu8SPxiqlu12wZP/3sWmnc=
+github.com/gorilla/websocket v1.5.0/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
+github.com/kelseyhightower/envconfig v1.4.0 h1:Im6hONhd3pLkfDFsbRgu68RDNkGF1r3dvMUtDTo2cv8=
+github.com/kelseyhightower/envconfig v1.4.0/go.mod h1:cccZRl6mQpaq41TPp5QxidR+Sa3axMbJDNb//FQX6Gg=
