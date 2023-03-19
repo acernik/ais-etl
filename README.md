@@ -11,7 +11,10 @@ To run the code, you need to have a .env file in the root of the project. The .e
 from the .env.example file with the correct values.
 
 To run the code, you need to run the following command:
-```make run```
+```make run```. 
+The ```make run``` expects that you have a ```run.sh``` file in the root of the project. The ```run.sh``` file should 
+contain the following command:
+```export AISETL_APIKEY=YOUR_APIKEY_HERE && go run main.go```.
 
 ## Client package
 The client package contains the code to connect to the AIS API and receive AIS data.
