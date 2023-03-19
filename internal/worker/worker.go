@@ -32,8 +32,6 @@ func New(ac client.AISReadWriter, apk string, bbs [][][]float64) AISWorker {
 
 // DoWork reads from the AISStream websocket and writes to a database.
 func (a *aisWorker) DoWork() error {
-	log.Printf("apiKey: %s", a.apiKey)
-	log.Printf("boundingBoxes: %v", a.boundingBoxes)
 	subMsg := aisstream.SubscriptionMessage{
 		APIKey: a.apiKey,
 		// https://gist.github.com/graydon/11198540
