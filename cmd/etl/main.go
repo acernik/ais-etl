@@ -1,11 +1,13 @@
 package main
 
 import (
+	"log"
+
+	"github.com/gorilla/websocket"
+
 	"github.com/acernik/ais-etl/internal/client"
 	"github.com/acernik/ais-etl/internal/config"
 	"github.com/acernik/ais-etl/internal/worker"
-	"github.com/gorilla/websocket"
-	"log"
 )
 
 func main() {

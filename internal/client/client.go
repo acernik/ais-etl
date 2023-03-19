@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+
 	aisstream "github.com/aisstream/ais-message-models/golang/aisStream"
 	"github.com/gorilla/websocket"
 )
