@@ -7,9 +7,6 @@ Thi repo contains the code for the AIS ETL process.
 ```make deps```
 
 ## How to run
-To run the code, you need to have a .env file in the root of the project. The .env file should contain the variables 
-from the .env.example file with the correct values.
-
 To run the code, you need to run the following command:
 ```make run```. 
 The ```make run``` expects that you have a ```run.sh``` file in the root of the project. The ```run.sh``` file should 
