@@ -12,12 +12,12 @@ type Config struct {
 	WssURL          string `default:"wss://stream.aisstream.io/v0/stream"`
 	APIKey          string
 	UpperLeftCorner struct {
-		Latitude  float64 `default:"45.0183298"`
-		Longitude float64 `default:"-13.0210119"`
+		Latitude  float64 `default:"36.147079"`
+		Longitude float64 `default:"-35.991341"`
 	}
 	LowerRightCorner struct {
-		Latitude  float64 `default:"45.2999917"`
-		Longitude float64 `default:"-12.6365902"`
+		Latitude  float64 `default:"77.807236"`
+		Longitude float64 `default:"16.008856"`
 	}
 }
 
