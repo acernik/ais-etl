@@ -22,8 +22,8 @@ BEGIN;
         raim BOOLEAN NOT NULL,
         communication_state BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -40,8 +40,8 @@ BEGIN;
         spare BOOLEAN NOT NULL,
         text TEXT NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -52,8 +52,8 @@ BEGIN;
         designated_area_code BIGSERIAL NOT NULL,
         function_identifier BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -71,8 +71,8 @@ BEGIN;
         abm_application_id BIGSERIAL NOT NULL,
         binary_data TEXT NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_address_binary_message_application_id FOREIGN KEY (abm_application_id) REFERENCES application_id (id)
     );
@@ -86,8 +86,8 @@ BEGIN;
         C BIGSERIAL NOT NULL,
         D BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -114,8 +114,8 @@ BEGIN;
         spare BOOLEAN NOT NULL,
         name_extension TEXT NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_aids_to_navigation_report_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id)
     );
@@ -132,8 +132,8 @@ BEGIN;
         mode BIGSERIAL NOT NULL,
         interval BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
     CREATE TABLE assigned_mode_command_commands (
@@ -145,8 +145,8 @@ BEGIN;
         amcc_offset BIGSERIAL NOT NULL,
         increment BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_assigned_mode_command_commands_assigned_mode_command_id FOREIGN KEY (assigned_mode_command_id) REFERENCES assigned_mode_command (id)
     );
@@ -174,8 +174,8 @@ BEGIN;
         raim BOOLEAN NOT NULL,
         communication_state BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -188,8 +188,8 @@ BEGIN;
         valid BOOLEAN NOT NULL,
         spare BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -201,8 +201,8 @@ BEGIN;
         destination_id BIGSERIAL NOT NULL,
         sequenceinteger BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_binary_acknowledge_destinations0_binary_acknowledge_id FOREIGN KEY (binary_acknowledge_id) REFERENCES binary_acknowledge (id)
     );
@@ -215,8 +215,8 @@ BEGIN;
         designated_area_code BIGSERIAL NOT NULL,
         function_identifier BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -231,8 +231,8 @@ BEGIN;
         application_id BIGSERIAL NOT NULL,
         binary_data TEXT NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_binary_broadcast_message_application_id FOREIGN KEY (application_id) REFERENCES addressed_binary_message_application_id (id)
     );
@@ -246,8 +246,8 @@ BEGIN;
         longitude2 DOUBLE PRECISION NOT NULL,
         latitude2 DOUBLE PRECISION NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -259,8 +259,8 @@ BEGIN;
         address_station2 BIGSERIAL NOT NULL,
         spare3 BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -283,8 +283,8 @@ BEGIN;
         area BIGSERIAL NOT NULL,
         unicast BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_channel_management_area FOREIGN KEY (area) REFERENCES channel_management_area (id),
         CONSTRAINT fk_channel_management_unicast FOREIGN KEY (unicast) REFERENCES channel_management_unicast (id)
@@ -302,8 +302,8 @@ BEGIN;
         destination_id BIGSERIAL NOT NULL,
         spare2 BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -316,8 +316,8 @@ BEGIN;
         valid BOOLEAN NOT NULL,
         spare BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -331,8 +331,8 @@ BEGIN;
         time_out BIGSERIAL NOT NULL,
         increment BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_data_link_management_message_data0_data_link_management_message_id FOREIGN KEY (data_link_management_message_id) REFERENCES data_link_management_message (id)
     );
@@ -363,8 +363,8 @@ BEGIN;
         assigned_mode BOOLEAN NOT NULL,
         spare3 BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_extended_class_b_position_report_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id)
     );
@@ -383,8 +383,8 @@ BEGIN;
         spare2 BIGSERIAL NOT NULL,
         data TEXT NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -408,8 +408,8 @@ BEGIN;
         quiet_time BIGSERIAL NOT NULL,
         spare3 BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -422,8 +422,8 @@ BEGIN;
        valid BOOLEAN NOT NULL,
        spare BIGSERIAL NOT NULL,
 
-       created_at TIMESTAMP NOT NULL,
-       updated_at TIMESTAMP NOT NULL
+       created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+       updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -436,8 +436,8 @@ BEGIN;
         station_id BIGSERIAL NOT NULL,
         slot_offset BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_interrogation_station1_msg1_interrogation_id FOREIGN KEY (interrogation_id) REFERENCES interrogation (id)
     );
@@ -452,8 +452,8 @@ BEGIN;
         spare BIGSERIAL NOT NULL,
         slot_offset BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_interrogation_station1_msg2_interrogation_id FOREIGN KEY (interrogation_id) REFERENCES interrogation (id)
     );
@@ -470,8 +470,8 @@ BEGIN;
         slot_offset BIGSERIAL NOT NULL,
         spare2 BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_interrogation_station2_interrogation_id FOREIGN KEY (interrogation_id) REFERENCES interrogation (id)
     );
@@ -494,8 +494,8 @@ BEGIN;
         position_latency BOOLEAN NOT NULL,
         spare BOOLEAN NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -516,8 +516,8 @@ BEGIN;
         communication_state_is_itdma BOOLEAN NOT NULL,
         communication_state BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_multi_slot_binary_message_application_id FOREIGN KEY (application_id) REFERENCES addressed_binary_message_application_id (id)
     );
@@ -533,8 +533,8 @@ BEGIN;
         spare BIGSERIAL NOT NULL,
         text TEXT NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -546,8 +546,8 @@ BEGIN;
         hour BIGSERIAL NOT NULL,
         minute BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
     CREATE TABLE ship_static_data (
@@ -570,8 +570,8 @@ BEGIN;
         dte BOOLEAN NOT NULL,
         spare BOOLEAN NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_ship_static_data_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id),
         CONSTRAINT fk_ship_static_data_eta FOREIGN KEY (eta) REFERENCES ship_static_data_eta (id)
@@ -592,8 +592,8 @@ BEGIN;
         application_id BIGSERIAL NOT NULL,
         payload TEXT NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_single_slot_binary_message_application_id FOREIGN KEY (application_id) REFERENCES addressed_binary_message_application_id (id)
     );
@@ -625,8 +625,8 @@ BEGIN;
         communication_state_is_itdma BOOLEAN NOT NULL,
         communication_state BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -653,8 +653,8 @@ BEGIN;
         communication_state_is_itdma BOOLEAN NOT NULL,
         communication_state BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW()
     );
 
 
@@ -682,8 +682,8 @@ BEGIN;
         fix_type BIGSERIAL NOT NULL,
         spare BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_static_data_report_report_b_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id)
     );
@@ -701,8 +701,8 @@ BEGIN;
         report_a BIGSERIAL NOT NULL,
         report_b BIGSERIAL NOT NULL,
 
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+        updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
 
         CONSTRAINT fk_static_data_report_report_a FOREIGN KEY (report_a) REFERENCES static_data_report_report_a (id),
         CONSTRAINT fk_static_data_report_report_b FOREIGN KEY (report_b) REFERENCES static_data_report_report_b (id)
