@@ -2,12 +2,12 @@ package worker
 
 import (
 	"fmt"
-	"github.com/acernik/ais-etl/internal/dal"
 	"log"
 
 	aisstream "github.com/aisstream/ais-message-models/golang/aisStream"
 
 	"github.com/acernik/ais-etl/internal/client"
+	"github.com/acernik/ais-etl/internal/dal"
 )
 
 // AISWorker is an interface for a worker that reads from the AISStream websocket and writes to a database.
