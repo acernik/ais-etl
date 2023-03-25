@@ -10,11 +10,11 @@ BEGIN;
         valid BOOLEAN NOT NULL,
         navigational_status BIGSERIAL NOT NULL,
         rate_of_turn BIGSERIAL NOT NULL,
-        sog DECIMAL PRECISION NOT NULL,
+        sog DOUBLE PRECISION NOT NULL,
         position_accuracy BOOLEAN NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
-        cog DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
+        cog DOUBLE PRECISION NOT NULL,
         true_heading BIGSERIAL NOT NULL,
         timestamp TIMESTAMP NOT NULL,
         special_manoeuvre_indicator BIGSERIAL NOT NULL,
@@ -68,13 +68,13 @@ BEGIN;
         destination_id BIGSERIAL NOT NULL,
         retransmission BOOLEAN NOT NULL,
         spare BOOLEAN NOT NULL,
-        application_id BIGSERIAL NOT NULL,
+        abm_application_id BIGSERIAL NOT NULL,
         binary_data TEXT NOT NULL,
 
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_address_binary_message_application_id (application_id) REFERENCES application_id (id)
+        CONSTRAINT fk_address_binary_message_application_id FOREIGN KEY (abm_application_id) REFERENCES application_id (id)
     );
 
 
@@ -101,8 +101,8 @@ BEGIN;
         type BIGSERIAL NOT NULL,
         name TEXT NOT NULL,
         position_accuracy BOOLEAN NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
         dimension BIGSERIAL NOT NULL,
         fixtype BIGSERIAL NOT NULL,
         timestamp BIGSERIAL NOT NULL,
@@ -117,7 +117,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_aids_to_navigation_report_dimension (dimension) REFERENCES ship_static_data_dimensions (id)
+        CONSTRAINT fk_aids_to_navigation_report_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id)
     );
 
 
@@ -142,13 +142,13 @@ BEGIN;
         assigned_mode_command_id BIGSERIAL NOT NULL,
         valid BOOLEAN NOT NULL,
         destination_id BIGSERIAL NOT NULL,
-        offset BIGSERIAL NOT NULL,
+        amcc_offset BIGSERIAL NOT NULL,
         increment BIGSERIAL NOT NULL,
 
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_assigned_mode_command_commands_assigned_mode_command_id (assigned_mode_command_id) REFERENCES assigned_mode_command (id)
+        CONSTRAINT fk_assigned_mode_command_commands_assigned_mode_command_id FOREIGN KEY (assigned_mode_command_id) REFERENCES assigned_mode_command (id)
     );
 
 
@@ -166,13 +166,27 @@ BEGIN;
         utc_minute BIGSERIAL NOT NULL,
         utc_second BIGSERIAL NOT NULL,
         position_accuracy BOOLEAN NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
         fixtype BIGSERIAL NOT NULL,
         long_range_enable BOOLEAN NOT NULL,
         spare BIGSERIAL NOT NULL,
         raim BOOLEAN NOT NULL,
         communication_state BIGSERIAL NOT NULL,
+
+        created_at TIMESTAMP NOT NULL,
+        updated_at TIMESTAMP NOT NULL
+    );
+
+
+    CREATE TABLE binary_acknowledge (
+        id BIGSERIAL PRIMARY KEY,
+
+        message_id BIGSERIAL NOT NULL,
+        repeat_indicator BIGSERIAL NOT NULL,
+        user_id BIGSERIAL NOT NULL,
+        valid BOOLEAN NOT NULL,
+        spare BIGSERIAL NOT NULL,
 
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL
@@ -190,21 +204,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_binary_acknowledge_destinations0_binary_acknowledge_id (binary_acknowledge_id) REFERENCES binary_acknowledge (id)
-    );
-
-
-    CREATE TABLE binary_acknowledge (
-        id BIGSERIAL PRIMARY KEY,
-
-        message_id BIGSERIAL NOT NULL,
-        repeat_indicator BIGSERIAL NOT NULL,
-        user_id BIGSERIAL NOT NULL,
-        valid BOOLEAN NOT NULL,
-        spare BIGSERIAL NOT NULL,
-
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL
+        CONSTRAINT fk_binary_acknowledge_destinations0_binary_acknowledge_id FOREIGN KEY (binary_acknowledge_id) REFERENCES binary_acknowledge (id)
     );
 
 
@@ -234,17 +234,17 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_binary_broadcast_message_application_id (application_id) REFERENCES addressed_binary_message_application_id (id)
+        CONSTRAINT fk_binary_broadcast_message_application_id FOREIGN KEY (application_id) REFERENCES addressed_binary_message_application_id (id)
     );
 
 
     CREATE TABLE channel_management_area (
         id BIGSERIAL PRIMARY KEY,
 
-        longitude1 DECIMAL PRECISION NOT NULL,
-        latitude1 DECIMAL PRECISION NOT NULL,
-        longitude2 DECIMAL PRECISION NOT NULL,
-        latitude2 DECIMAL PRECISION NOT NULL,
+        longitude1 DOUBLE PRECISION NOT NULL,
+        latitude1 DOUBLE PRECISION NOT NULL,
+        longitude2 DOUBLE PRECISION NOT NULL,
+        latitude2 DOUBLE PRECISION NOT NULL,
 
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL
@@ -286,8 +286,8 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_channel_management_area (area) REFERENCES channel_management_area (id),
-        FOREIGN KEY fk_channel_management_unicast (unicast) REFERENCES channel_management_unicast (id)
+        CONSTRAINT fk_channel_management_area FOREIGN KEY (area) REFERENCES channel_management_area (id),
+        CONSTRAINT fk_channel_management_unicast FOREIGN KEY (unicast) REFERENCES channel_management_unicast (id)
     );
 
 
@@ -307,23 +307,6 @@ BEGIN;
     );
 
 
-    CREATE TABLE data_link_management_message_data0 (
-        id BIGSERIAL PRIMARY KEY,
-
-        data_link_management_message_id BIGSERIAL NOT NULL,
-        valid BOOLEAN NOT NULL,
-        offset BIGSERIAL NOT NULL,
-        integer_of_slots BIGSERIAL NOT NULL,
-        time_out BIGSERIAL NOT NULL,
-        increment BIGSERIAL NOT NULL,
-
-        created_at TIMESTAMP NOT NULL,
-        updated_at TIMESTAMP NOT NULL,
-
-        FOREIGN KEY fk_data_link_management_message_data0_data_link_management_message_id (data_link_management_message_id) REFERENCES data_link_management_message (id)
-    );
-
-
     CREATE TABLE data_link_management_message (
         id BIGSERIAL PRIMARY KEY,
 
@@ -338,6 +321,23 @@ BEGIN;
     );
 
 
+    CREATE TABLE data_link_management_message_data0 (
+        id BIGSERIAL PRIMARY KEY,
+
+        data_link_management_message_id BIGSERIAL NOT NULL,
+        valid BOOLEAN NOT NULL,
+        dlmmd_offset BIGSERIAL NOT NULL,
+        integer_of_slots BIGSERIAL NOT NULL,
+        time_out BIGSERIAL NOT NULL,
+        increment BIGSERIAL NOT NULL,
+
+        created_at TIMESTAMP NOT NULL,
+        updated_at TIMESTAMP NOT NULL,
+
+        CONSTRAINT fk_data_link_management_message_data0_data_link_management_message_id FOREIGN KEY (data_link_management_message_id) REFERENCES data_link_management_message (id)
+    );
+
+
     CREATE TABLE extended_class_b_position_report (
         id BIGSERIAL PRIMARY KEY,
 
@@ -346,11 +346,11 @@ BEGIN;
         user_id BIGSERIAL NOT NULL,
         valid BOOLEAN NOT NULL,
         spare BIGSERIAL NOT NULL,
-        sog DECIMAL PRECISION NOT NULL,
+        sog DOUBLE PRECISION NOT NULL,
         position_accuracy BOOLEAN NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
-        cog DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
+        cog DOUBLE PRECISION NOT NULL,
         true_heading BIGSERIAL NOT NULL,
         timestamp BIGSERIAL NOT NULL,
         spare2 BIGSERIAL NOT NULL,
@@ -366,7 +366,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_extended_class_b_position_report_dimension (dimension) REFERENCES ship_static_data_dimension (id)
+        CONSTRAINT fk_extended_class_b_position_report_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id)
     );
 
 
@@ -378,8 +378,8 @@ BEGIN;
         user_id BIGSERIAL NOT NULL,
         valid BOOLEAN NOT NULL,
         spare BIGSERIAL NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
         spare2 BIGSERIAL NOT NULL,
         data TEXT NOT NULL,
 
@@ -396,10 +396,10 @@ BEGIN;
         user_id BIGSERIAL NOT NULL,
         valid BOOLEAN NOT NULL,
         spare1 BIGSERIAL NOT NULL,
-        longitude1 DECIMAL PRECISION NOT NULL,
-        latitude1 DECIMAL PRECISION NOT NULL,
-        longitude2 DECIMAL PRECISION NOT NULL,
-        latitude2 DECIMAL PRECISION NOT NULL,
+        longitude1 DOUBLE PRECISION NOT NULL,
+        latitude1 DOUBLE PRECISION NOT NULL,
+        longitude2 DOUBLE PRECISION NOT NULL,
+        latitude2 DOUBLE PRECISION NOT NULL,
         station_type BIGSERIAL NOT NULL,
         ship_type BIGSERIAL NOT NULL,
         spare2 BIGSERIAL NOT NULL,
@@ -439,7 +439,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_interrogation_station1_msg1_interrogation_id (interrogation_id) REFERENCES interrogation (id)
+        CONSTRAINT fk_interrogation_station1_msg1_interrogation_id FOREIGN KEY (interrogation_id) REFERENCES interrogation (id)
     );
 
 
@@ -455,7 +455,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_interrogation_station1_msg2_interrogation_id (interrogation_id) REFERENCES interrogation (id)
+        CONSTRAINT fk_interrogation_station1_msg2_interrogation_id FOREIGN KEY (interrogation_id) REFERENCES interrogation (id)
     );
 
 
@@ -473,7 +473,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_interrogation_station2_interrogation_id (interrogation_id) REFERENCES interrogation (id)
+        CONSTRAINT fk_interrogation_station2_interrogation_id FOREIGN KEY (interrogation_id) REFERENCES interrogation (id)
     );
 
 
@@ -487,10 +487,10 @@ BEGIN;
         position_accuracy BOOLEAN NOT NULL,
         raim BOOLEAN NOT NULL,
         navigational_status BIGSERIAL NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
-        sog DECIMAL PRECISION NOT NULL,
-        cog DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
+        sog DOUBLE PRECISION NOT NULL,
+        cog DOUBLE PRECISION NOT NULL,
         position_latency BOOLEAN NOT NULL,
         spare BOOLEAN NOT NULL,
 
@@ -519,7 +519,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_multi_slot_binary_message_application_id (application_id) REFERENCES addressed_binary_message_application_id (id)
+        CONSTRAINT fk_multi_slot_binary_message_application_id FOREIGN KEY (application_id) REFERENCES addressed_binary_message_application_id (id)
     );
 
 
@@ -544,7 +544,10 @@ BEGIN;
         month BIGSERIAL NOT NULL,
         day BIGSERIAL NOT NULL,
         hour BIGSERIAL NOT NULL,
-        minute BIGSERIAL NOT NULL
+        minute BIGSERIAL NOT NULL,
+
+        created_at TIMESTAMP NOT NULL,
+        updated_at TIMESTAMP NOT NULL
     );
 
     CREATE TABLE ship_static_data (
@@ -562,7 +565,7 @@ BEGIN;
         dimension BIGSERIAL NOT NULL,
         fix_type BIGSERIAL NOT NULL,
         eta BIGSERIAL NOT NULL,
-        maximum_static_draught DECIMAL PRECISION NOT NULL,
+        maximum_static_draught DOUBLE PRECISION NOT NULL,
         destination TEXT NOT NULL,
         dte BOOLEAN NOT NULL,
         spare BOOLEAN NOT NULL,
@@ -570,8 +573,8 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_ship_static_data_dimension (dimension) REFERENCES ship_static_data_dimension (id),
-        FOREIGN KEY fk_ship_static_data_eta (eta) REFERENCES ship_static_data_eta (id)
+        CONSTRAINT fk_ship_static_data_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id),
+        CONSTRAINT fk_ship_static_data_eta FOREIGN KEY (eta) REFERENCES ship_static_data_eta (id)
     );
 
 
@@ -592,7 +595,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_single_slot_binary_message_application_id (application_id) REFERENCES addressed_binary_message_application_id (id)
+        CONSTRAINT fk_single_slot_binary_message_application_id FOREIGN KEY (application_id) REFERENCES addressed_binary_message_application_id (id)
     );
 
 
@@ -604,11 +607,11 @@ BEGIN;
         user_id BIGSERIAL NOT NULL,
         valid BOOLEAN NOT NULL,
         spare1 BIGSERIAL NOT NULL,
-        sog DECIMAL PRECISION NOT NULL,
+        sog DOUBLE PRECISION NOT NULL,
         position_accuracy BOOLEAN NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
-        cog DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
+        cog DOUBLE PRECISION NOT NULL,
         true_heading BIGSERIAL NOT NULL,
         timestamp BIGSERIAL NOT NULL,
         spare2 BIGSERIAL NOT NULL,
@@ -635,11 +638,11 @@ BEGIN;
         user_id BIGSERIAL NOT NULL,
         valid BOOLEAN NOT NULL,
         altitude BIGSERIAL NOT NULL,
-        sog DECIMAL PRECISION NOT NULL,
+        sog DOUBLE PRECISION NOT NULL,
         position_accuracy BOOLEAN NOT NULL,
-        longitude DECIMAL PRECISION NOT NULL,
-        latitude DECIMAL PRECISION NOT NULL,
-        cog DECIMAL PRECISION NOT NULL,
+        longitude DOUBLE PRECISION NOT NULL,
+        latitude DOUBLE PRECISION NOT NULL,
+        cog DOUBLE PRECISION NOT NULL,
         timestamp BIGSERIAL NOT NULL,
         alt_from_baro BOOLEAN NOT NULL,
         spare1 BIGSERIAL NOT NULL,
@@ -682,7 +685,7 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_static_data_report_report_b_dimension (dimension) REFERENCES ship_static_data_dimension (id)
+        CONSTRAINT fk_static_data_report_report_b_dimension FOREIGN KEY (dimension) REFERENCES ship_static_data_dimensions (id)
     );
 
 
@@ -701,8 +704,8 @@ BEGIN;
         created_at TIMESTAMP NOT NULL,
         updated_at TIMESTAMP NOT NULL,
 
-        FOREIGN KEY fk_static_data_report_report_a (report_a) REFERENCES static_data_report_report_a (id),
-        FOREIGN KEY fk_static_data_report_report_b (report_b) REFERENCES static_data_report_report_b (id)
+        CONSTRAINT fk_static_data_report_report_a FOREIGN KEY (report_a) REFERENCES static_data_report_report_a (id),
+        CONSTRAINT fk_static_data_report_report_b FOREIGN KEY (report_b) REFERENCES static_data_report_report_b (id)
     );
 
 
