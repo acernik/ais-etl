@@ -10,6 +10,7 @@ import (
 // AISReadWriter is the interface for the AIS DAL.
 type AISReadWriter interface {
 	InsertPositionReport(ctx context.Context, pr *aisStream.PositionReport) error
+	InsertAddressedSafetyMessage(ctx context.Context, asm *aisStream.AddressedSafetyMessage) error
 }
 
 // aisReadWriter is the value of type that implements AISReadWriter.
