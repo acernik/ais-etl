@@ -2,6 +2,7 @@ package worker
 
 import (
 	"fmt"
+	"github.com/acernik/ais-etl/internal/dal"
 	"log"
 
 	aisstream "github.com/aisstream/ais-message-models/golang/aisStream"
@@ -17,14 +18,16 @@ type AISWorker interface {
 // aisWorker is a struct that implements the AISWorker interface.
 type aisWorker struct {
 	aisClient     client.AISReadWriter
+	aisDal        dal.AISReadWriter
 	apiKey        string
 	boundingBoxes [][][]float64
 }
 
 // New returns a new value of type that implements AISWorker.
-func New(ac client.AISReadWriter, apk string, bbs [][][]float64) AISWorker {
+func New(ac client.AISReadWriter, ad dal.AISReadWriter, apk string, bbs [][][]float64) AISWorker {
 	return &aisWorker{
 		aisClient:     ac,
+		aisDal:        ad,
 		apiKey:        apk,
 		boundingBoxes: bbs,
 	}
