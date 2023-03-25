@@ -22,3 +22,13 @@ The worker package contains the code to process the AIS data and store it in the
 ## DAL package
 The DAL package contains the code to connect to the database and perform CRUD operations. However, it is not yet 
 implemented.
+
+## DB migrations
+The DB migrations are located in the ```migrations``` folder. To run the migrations, you need to run the following:
+```make migrateUp``` to run the latest migrations or ```make migrateDown``` to rollback the migrations.
+
+Before running the migrations, you need to create a database called ```aisetl``` in your local Postgres instance.
+
+And you need to install ```migrate``` CLI tool. To install it, run the following command:
+```brew install golang-migrate``` on Mac OS. For other OS, please refer to the following link:
+https://github.com/golang-migrate/migrate/blob/master/cmd/migrate/README.md
